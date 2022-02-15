@@ -1,7 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
+# change change
 name: CI
-
 # Controls when the workflow will run
 on:
   push:
@@ -21,19 +19,22 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2     
+      - uses: actions/checkout@v2        
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Opening pull request
-        id: pull
-        uses: tretuna/sync-branches@1.4.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          TO_BRANCH: "release/2.0.0"
+      - uses: yanamura/git-flow-merge-action@v1
+        with: 
+          ### GITHUB_TOKEN.(required)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+          ### branch name which merged to develop and master branch.(required)
+          ### ex. release/1.1.0, hotfix_branch
+          branch: ${{ steps.extract_branch.outputs.branch }}
+
+          ### develop branch name. default: develop (optional).
+          develop_branch: 'release/2.0.0'
+
+          ### main branch name. default: master (optional).
+          main_branch: 'main'
