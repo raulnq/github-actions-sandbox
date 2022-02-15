@@ -20,21 +20,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2     
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      - name: Set up Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - name: Opening pull request
-        id: pull
-        uses: tretuna/sync-branches@1.4.0
-        with:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          FROM_BRANCH: ${{ steps.extract_branch.outputs.branch }}
-          TO_BRANCH: "release/2.0.0"
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3
