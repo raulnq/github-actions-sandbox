@@ -26,7 +26,6 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
-      - run: echo ${{ steps.extract_branch.outputs.branch }}
       - name: Set up Node
         uses: actions/setup-node@v1
         with:
