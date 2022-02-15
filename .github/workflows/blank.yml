@@ -35,3 +35,10 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           FROM_BRANCH: ${{ steps.extract_branch.outputs.branch }}
           TO_BRANCH: "release/2.0.0"
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          branch: release/2.0.0
+          reviewers: raulnq
