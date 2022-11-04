@@ -1,5 +1,5 @@
 # change change change change
-name: CI
+name: automerge
 # Controls when the workflow will run
 on:
   push:
@@ -20,21 +20,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2        
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
-      - uses: yanamura/git-flow-merge-action@v1
-        with: 
+      - name: AutoMerge
+        uses: raulnq/git-flow-automerge@v0.3.0
+        with:
           ### GITHUB_TOKEN.(required)
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-          ### branch name which merged to develop and master branch.(required)
-          ### ex. release/1.1.0, hotfix_branch
-          branch: ${{ steps.extract_branch.outputs.branch }}
+          ### branch type name. default: release (optional).
+          release_branch_type: 'release'
 
           ### develop branch name. default: develop (optional).
-          develop_branch: 'release/2.0.0'
-
-          ### main branch name. default: master (optional).
-          main_branch: 'main'
+          develop_branch: 'develop'
