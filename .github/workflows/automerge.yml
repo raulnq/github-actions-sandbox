@@ -21,7 +21,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2        
       - name: AutoMerge
-        uses: raulnq/git-flow-automerge@v0.3.0
+        uses: raulnq/git-flow-automerge@v0.4.0
         with:
           ### GITHUB_TOKEN.(required)
           github_token: ${{ secrets.GITHUB_TOKEN }}
