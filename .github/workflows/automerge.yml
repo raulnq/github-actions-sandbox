@@ -24,7 +24,7 @@ jobs:
         uses: raulnq/git-flow-automerge@v0.4.1
         with:
           ### GITHUB_TOKEN.(required)
-          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          github_token: ${{ secrets.AUTOMERGE_TOKEN }}
 
           ### branch type name. default: release (optional).
           release_branch_type: 'release'
